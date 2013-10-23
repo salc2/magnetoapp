@@ -36,40 +36,49 @@ public class ApplicationTest {
     
     @Test 
     public void mutantCheck()throws Exception {
-    	String[] dna = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};   	
+    	String[] dna = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"}; 
+    	/**
+    	 * 
+    	 * A T G C G A
+    	 * C A G T G C
+    	 * T T A T G T
+    	 * A G A A G G
+    	 * C C C C T A
+    	 * T C A C T G
+    	 * 
+    	 * 
+    	 * 
+    	 * ***/
     	
         assertThat(isMutant(dna)).isEqualTo(true);
     }
-    
+
     
     private boolean isMutant(String[] dna) throws Exception{
-    	int hor=0,ver=0,dia=0,total=0;
-    	if(dna.length > 0 && dna.length == dna[0].length()){
-    		for(int y =0;y< dna.length;y++){
-    			hor = 0;  dia = 0;
-    			for(int x=0;x< dna[y].length();x++){    			
-    				if(x < dna[x].length()-2){
-//    					hor = dna[y].charAt(x) == dna[y].charAt(x+1) ? hor+1 : hor;
-    					if(dna[y].charAt(x) == dna[y].charAt(x+1)){
-    						System.out.println(dna[y].charAt(x));
-    						hor++;
-    					}
-    				}
-//    				for(int u=0;u<dna.length;u++){
-//    					if(u < dna.length -2){
-//	    					ver = dna[u].charAt(x) == dna[u+1].charAt(x) ? ver+1 : ver;
-//	    				}  		
-//    				}
-    			}    			
-    			 
-    			total = hor >= 3 || ver >= 3 || dia >= 3 ? total + 1 : total;
-    		}    	
-    		
-    	}else{
-    		throw new Exception("Wrong format DNA Exception");
-    	}    	
-    	System.out.println("total "+total); 
-    	return total>1;    	
+    	int count = 0;
+    	int total = 0;
+    	int hor = 0;
+    	for(int i = 0; i<dna.length;i++){
+    		char pre = dna[i].charAt(0);
+    		for(int y=0;y<dna.length;y++){
+    			final char curr = dna[i].charAt(y);
+    				if(pre == curr){
+    					count++;
+    					pre = curr;
+    				}else if(count>=3){
+    					total++;
+    					pre = curr;
+    					count = 0;
+    				}else{
+    					count = 0;
+    					pre = curr;
+    				}    	
+    		System.out.print("["+dna[i].charAt(y)+"]");
+    		}    		
+    		System.out.println("");
+    	}
+    	return 	true;
     }
+
    
 }
