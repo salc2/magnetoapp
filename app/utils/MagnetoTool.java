@@ -26,11 +26,28 @@ public class MagnetoTool {
 		return total > 1;
 	}
 
+//	private int checkMutantHelper(String[] dna, int r, int c, int rsum, int csum) {
+//		if (dna.length - (r + rsum) > 0 && dna.length - (c + csum) > 0) {
+//			if (dna[r].charAt(c) == dna[r + rsum].charAt(c + csum)) {
+//				System.out.println(dna[r].charAt(c) );
+//				return 1 + checkMutantHelper(dna, r + rsum, c + csum, rsum,	csum);
+//			} else {
+//				return checkMutantHelper(dna, r + rsum, c + csum, rsum, csum);
+//			}
+//		} else {
+//			return 0;
+//		}
+//	}
+	
+	
+	
 	private int checkMutantHelper(String[] dna, int r, int c, int rsum, int csum) {
-		if (dna.length - (r + rsum) > 0 && dna.length - (c + csum) > 0) {
-			if (dna[r].charAt(c) == dna[r + rsum].charAt(c + csum)) {
-				System.out.println(dna[r].charAt(c) );
-				return 1 + checkMutantHelper(dna, r + rsum, c + csum, rsum,	csum);
+		if (r < dna.length && c < dna[0].length()) {
+			if (r-rsum < 0 || c-csum < 0) {
+				return checkMutantHelper(dna, r + rsum, c + csum, rsum, csum);
+			} else if (dna[r].charAt(c) == dna[r - rsum].charAt(c - csum)) {
+				return 1 + checkMutantHelper(dna, r + rsum, c + csum, rsum,
+						csum);
 			} else {
 				return checkMutantHelper(dna, r + rsum, c + csum, rsum, csum);
 			}
