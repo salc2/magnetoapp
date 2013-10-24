@@ -26,8 +26,7 @@ public class MagnetoTool {
 		return total > 1;
 	}
 	
-	private int checkMutantHelper(String[] dna, int r, int c, int rsum, int csum) {
-		
+	private int checkMutantHelper(String[] dna, int r, int c, int rsum, int csum) {		
 		if (r < dna.length && c < dna[0].length()) {
 			if (r-rsum < 0 || c-csum < 0) {
 				return checkMutantHelper(dna, r + rsum, c + csum, rsum, csum);
